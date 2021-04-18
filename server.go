@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gatewayCore/http"
+	http "gatewayCore/httpPluginLink"
 
 	"github.com/gin-gonic/gin"
 )
