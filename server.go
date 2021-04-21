@@ -1,7 +1,7 @@
 package main
 
 import (
-	http "gatewayCore/httpPluginLink"
+	serviceLinking "gatewayCore/gatewayServiceLinking"
 
 	gatewayRouting "gatewayCore/gatewayRouting"
 
@@ -16,17 +16,17 @@ func main() {
 
 	// ===== Train GraphQL Module ===== //
 
-	server.GET("/train/playground", http.PlaygroundHandler("/train"))
+	server.GET("/train/playground", serviceLinking.PlaygroundHandler("/train"))
 
-	server.POST("/train", http.GraphQLHandler("/train"))
+	server.POST("/train", serviceLinking.GraphQLHandler("/train"))
 
 	// ================================ //
 
 	// ===== Flight GraphQL Module ==== //
 
-	server.GET("/flight/playground", http.PlaygroundHandler("/flight"))
+	server.GET("/flight/playground", serviceLinking.PlaygroundHandler("/flight"))
 
-	server.POST("/flight", http.GraphQLHandler("/flight"))
+	server.POST("/flight", serviceLinking.GraphQLHandler("/flight"))
 
 	// ================================= //
 

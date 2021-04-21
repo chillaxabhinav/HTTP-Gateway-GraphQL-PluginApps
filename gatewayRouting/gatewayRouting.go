@@ -1,7 +1,7 @@
 package gatewayRouting
 
 import (
-	http "gatewayCore/httpPluginLink"
+	serviceLinking "gatewayCore/gatewayServiceLinking"
 
 	"github.com/gin-gonic/gin"
 )
@@ -32,6 +32,6 @@ func RoutingToGQL(c *gin.Context) {
 		return
 	}
 
-	http.GraphQLHandlerOneGatewayMiddleware(c, moduleEndpoint)
+	serviceLinking.GraphQLHandlerOneGatewayMiddleware(c, moduleEndpoint)
 
 }
