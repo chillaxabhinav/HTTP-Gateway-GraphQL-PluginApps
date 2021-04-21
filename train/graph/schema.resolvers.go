@@ -5,24 +5,29 @@ package graph
 
 import (
 	"context"
-	"fmt"
 	"gatewayCore/train/graph/generated"
 	"gatewayCore/train/graph/model"
 )
 
-func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
-	panic(fmt.Errorf("not implemented"))
+func (r *queryResolver) GetName(ctx context.Context) (*model.Name, error) {
+	myName := model.Name{
+		FirstName: "Abhinav",
+		LastName:  "Singh",
+	}
+
+	return &myName, nil
 }
 
-func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	panic(fmt.Errorf("not implemented"))
-}
+func (r *queryResolver) GetTrain(ctx context.Context) (*model.Train, error) {
+	myTrain := model.Train{
+		Name: "Exp",
+		Num:  2429,
+	}
 
-// Mutation returns generated.MutationResolver implementation.
-func (r *Resolver) Mutation() generated.MutationResolver { return &mutationResolver{r} }
+	return &myTrain, nil
+}
 
 // Query returns generated.QueryResolver implementation.
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
-type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }

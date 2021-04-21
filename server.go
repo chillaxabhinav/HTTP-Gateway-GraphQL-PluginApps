@@ -3,6 +3,8 @@ package main
 import (
 	http "gatewayCore/httpPluginLink"
 
+	gatewayRouting "gatewayCore/gatewayRouting"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -27,6 +29,12 @@ func main() {
 	server.POST("/flight", http.GraphQLHandler("/flight"))
 
 	// ================================= //
+
+	// ===== One Gateway ======= //
+
+	server.POST("/gateway", gatewayRouting.RoutingToGQL)
+
+	// ========================= //
 
 	server.Run(defaultPort)
 
