@@ -19,12 +19,18 @@ func RoutingToGQL(c *gin.Context) {
 	incomingModuleRequest := c.GetHeader("module")
 
 	if incomingModuleRequest == "" {
-		c.JSON(422, gin.H{"error": "No Module defined in query", "data": nil})
+		c.JSON(422, gin.H{"error": "No nodule header defined in query, expects a module header", "data": nil})
 		c.Abort()
 		return
 	}
 
-	moduleEndpoint := mapping[incomingModuleRequest]
+	moduleEndpoint, ok := mapping[incomingModuleRequest]
+
+	if !ok {
+		c.JSON(422, gin.H{"error": "Module not found", "data": nil})
+		c.Abort()
+		return
+	}
 
 	http.GraphQLHandlerOneGatewayMiddleware(c, moduleEndpoint)
 
