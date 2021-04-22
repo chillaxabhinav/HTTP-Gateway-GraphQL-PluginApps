@@ -1,7 +1,7 @@
 package main
 
 import (
-	serviceLinking "gatewayCore/gatewayServiceLinking"
+	serviceLinking "gatewayCore/serviceLinking"
 
 	gatewayRouting "gatewayCore/gatewayRouting"
 
@@ -14,19 +14,25 @@ func main() {
 
 	server := gin.Default()
 
-	// ===== Train GraphQL Module ===== //
+	// // ===== Train GraphQL Module ===== //
 
-	server.GET("/train/playground", serviceLinking.PlaygroundHandler("/train"))
+	// server.GET("/train/playground", serviceLinking.PlaygroundHandler("/train"))
 
-	server.POST("/train", serviceLinking.GraphQLHandler("/train"))
+	// server.POST("/train", serviceLinking.GraphQLHandler("/train"))
 
-	// ================================ //
+	// // ================================ //
 
-	// ===== Flight GraphQL Module ==== //
+	// // ===== Flight GraphQL Module ==== //
 
-	server.GET("/flight/playground", serviceLinking.PlaygroundHandler("/flight"))
+	// server.GET("/flight/playground", serviceLinking.PlaygroundHandler("/flight"))
 
-	server.POST("/flight", serviceLinking.GraphQLHandler("/flight"))
+	// server.POST("/flight", serviceLinking.GraphQLHandler("/flight"))
+
+	// // ================================= //
+
+	// ===== One Gateway Playground ==== //
+
+	server.GET("/playground", serviceLinking.PlaygroundHandler("/gateway"))
 
 	// ================================= //
 
