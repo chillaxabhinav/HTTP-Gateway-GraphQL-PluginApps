@@ -64,24 +64,24 @@ func PlaygroundHandler(endPoint string) gin.HandlerFunc {
 	}
 }
 
-// func GraphQLHandler(endpoint string) gin.HandlerFunc {
-// 	if endpoint == "/flight" {
-// 		srv := handler.NewDefaultServer(flightGenerated.NewExecutableSchema(flightGenerated.Config{Resolvers: &flightGraph.Resolver{}}))
-// 		return func(c *gin.Context) {
-// 			srv.ServeHTTP(c.Writer, c.Request)
-// 		}
-// 	} else if endpoint == "/train" {
-// 		srv := handler.NewDefaultServer(trainGenerated.NewExecutableSchema(trainGenerated.Config{Resolvers: &trainGraph.Resolver{}}))
-// 		return func(c *gin.Context) {
-// 			srv.ServeHTTP(c.Writer, c.Request)
-// 		}
-// 	} else {
-// 		return func(c *gin.Context) {
-// 			c.JSON(422, gin.H{"error": "No endpoint", "data": nil, "code": 422})
-// 			c.Abort()
-// 		}
-// 	}
-// }
+func GraphQLHandler(endpoint string) gin.HandlerFunc {
+	if endpoint == "/flight" {
+		srv := handler.NewDefaultServer(flightGenerated.NewExecutableSchema(flightGenerated.Config{Resolvers: &flightGraph.Resolver{}}))
+		return func(c *gin.Context) {
+			srv.ServeHTTP(c.Writer, c.Request)
+		}
+	} else if endpoint == "/train" {
+		srv := handler.NewDefaultServer(trainGenerated.NewExecutableSchema(trainGenerated.Config{Resolvers: &trainGraph.Resolver{}}))
+		return func(c *gin.Context) {
+			srv.ServeHTTP(c.Writer, c.Request)
+		}
+	} else {
+		return func(c *gin.Context) {
+			c.JSON(422, gin.H{"error": "No endpoint", "data": nil, "code": 422})
+			c.Abort()
+		}
+	}
+}
 
 func GraphQLHandlerOneGatewayMiddleware(c *gin.Context, moduleInfo ModuleInfoMap) {
 

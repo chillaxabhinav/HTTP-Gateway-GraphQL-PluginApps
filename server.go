@@ -1,11 +1,9 @@
 package main
 
 import (
-	serviceLinking "gatewayCore/serviceLinking"
-
-	gatewayRouting "gatewayCore/gatewayRouting"
-
 	"github.com/gin-gonic/gin"
+
+	"gatewayCore/requestHandler"
 )
 
 const defaultPort = ":8080"
@@ -32,15 +30,27 @@ func main() {
 
 	// ===== One Gateway Playground ==== //
 
-	server.GET("/playground", serviceLinking.PlaygroundHandler("/gateway"))
+	// server.GET("/playgroundOld", serviceLinking.PlaygroundHandler("/gateway"))
 
 	// ================================= //
 
 	// ===== One Gateway ======= //
 
-	server.POST("/gateway", gatewayRouting.RoutingToGQL)
+	// server.POST("/gateway", gatewayRouting.RoutingToGQL)
 
 	// ========================= //
+
+	server.Use(requestHandler.Init())
+
+	server.GET("/playground", gin.WrapF(requestHandler.PlaygroundHandler))
+
+	server.POST("/query", gin.WrapF(requestHandler.GraphQLHandler))
+
+	server.POST("/schema", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"data": requestHandler.MyMergedSchema,
+		})
+	})
 
 	server.Run(defaultPort)
 
